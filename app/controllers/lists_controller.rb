@@ -23,7 +23,7 @@ class ListsController < ApplicationController
   end
 
   def my_lists
-    @lists = List.where(user_id == current_user.id)
+    @lists = List.where(user_id: current_user.id)
   end
 
   def show
