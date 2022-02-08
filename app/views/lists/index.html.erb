@@ -1,9 +1,24 @@
-<div class="banner">
-  <h1>WATCHLIST</h1>
-  <%= link_to "Créer ma liste", new_list_path, class: "btn btn-success" %>
+<div class="banner" style="background-image: url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2luZW1hfGVufDB8fDB8fA%3D%3D&w=1000&q=80);">
+  <div class="heading">
+    <%= form_tag lists_path, method: :get do %>
+      <%= text_field_tag :query, params[:query], placeholder: "vous cherchez ?" %>
+      <button class="icon"><i class="fa fa-search"></i></button>
+    <% end %>
+    <h1><i class="fas fa-ticket-alt"></i> WATCHLIST <i class="fas fa-couch"></i></h1>
+    <%= link_to "Créer ma liste", new_list_path, class: "btn btn-success" %>
+  </div>
 </div>
-
-<% @lists.each do |list| %>
-  <%= link_to list.name, list_path(list) %>
-  <%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %>
+<% if @lists.empty? %>
+  <h2>Aucun résultat. Essayez autre chose</h2>
+  <% else %>
+<div class="grid">
+  <% @lists.each do |list| %>
+    <div class="card">
+      <%= cl_image_tag list.photo.key, crop: :fill %>
+      <div class="card-title">
+        <h2><%= link_to list.name, list_path(list) %></h2>
+      </div>
+    </div>
+  <% end %>
+</div>
 <% end %>

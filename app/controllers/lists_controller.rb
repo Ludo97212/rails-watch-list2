@@ -13,7 +13,12 @@ class ListsController < ApplicationController
   end
 
   def index
-    @lists = List.order(created_at: :desc).all
+    if params[:query].present?
+      sql_query = "name ILIKE :query"
+      @lists = List.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @lists = List.order(created_at: :desc).all
+    end
   end
 
   def show
@@ -25,8 +30,8 @@ class ListsController < ApplicationController
   end
 
   def update
-    @list = List.update(list_params)
-    if @list.save
+    set_list
+    if @list.update(list_params)
       redirect_to list_path(@list)
     else
       render :edit
