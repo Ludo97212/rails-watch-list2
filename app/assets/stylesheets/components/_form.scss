@@ -1,0 +1,33 @@
+.form-control {
+  display: block;
+  width: 60%;
+  padding: 10px 5px 10px 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #0E0000;
+  background-color: #F4F4F4;
+  background-clip: padding-box;
+  border: 2px solid #4d4d4d;
+  appearance: none;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+
+.trix-button-row {
+  padding-bottom: 10px;
+  button {
+    border-radius: 5px;
+    color: white;
+    background: rgb(110, 218, 77);
+    &:hover {
+      background: rgb(171, 219, 127);
+    }
+  }
+}
+
+.select {
+  padding: 12px;
+  font-weight: bold;
+}

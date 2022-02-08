@@ -1,5 +1,5 @@
 <%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.association :movie %>
-  <%= f.input :comment, as: :rich_text_area %>
+  <%= f.association :movie, label: "Film", html5: true %>
+  <%= f.input :comment, as: :rich_text_area, label: "Votre commentaire" %>
   <%= f.submit "Ajouter" %>
 <% end %>

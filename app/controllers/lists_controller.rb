@@ -5,6 +5,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    @list.user = current_user
     if @list.save
       redirect_to list_path(@list)
     else
@@ -21,6 +22,10 @@ class ListsController < ApplicationController
     end
   end
 
+  def my_lists
+    @lists = List.where(user_id == current_user.id)
+  end
+
   def show
     set_list
   end
@@ -31,10 +36,15 @@ class ListsController < ApplicationController
 
   def update
     set_list
-    if @list.update(list_params)
-      redirect_to list_path(@list)
+    if @list.user == current_user
+      if @list.update(list_params)
+        redirect_to list_path(@list)
+      else
+        render :edit
+      end
     else
-      render :edit
+      flash[:alert] = "Vous n'avez pas l'autorisation !!!"
+      redirect_to list_path(@list)
     end
   end
 

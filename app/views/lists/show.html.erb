@@ -2,27 +2,31 @@
   <div>
     <h1><%= @list.name %></h1>
   </div>
-  <div class="bottom">
-    <%= link_to "Ajouter un signet", new_list_bookmark_path(@list), class: "btn btn-success" %>
-    <%= link_to "Modifier Liste", edit_list_path(@list), class: "btn btn-warning" %>
-    <%= link_to "Supprimer Liste", list_path(@list), method: :delete, data: { confirm: "Etes vous sure?" }, class: "btn btn-danger" %>
-  </div>
-</div>
-
-<div class="bkms-list">
-  <% if @list.bookmarks.empty? %>
-    <h4>Votre liste est vide. N'hésitez pas à ajouter des signet</h4>
-  <% end %>
-  <% @list.bookmarks.each do |bkm| %>
-    <div class="card-bookmark">
-      <img src="<%= bkm.movie.poster_url %>">
-      <div class="card-bookmark-text">
-        <h2><%= bkm.movie.title %></h2>
-        <p><%= bkm.movie.overview %></p>
-        <p><%= bkm.comment %></p>
-        <%= link_to "Supprimer le signet", bookmark_path(bkm), method: :delete, data: { confirm: "Etes vous sure?" } %>
-      </div>
+  <% if @list.user == current_user %>
+    <div class="bottom">
+      <%= link_to "Ajouter un signet", new_list_bookmark_path(@list), class: "btn btn-success" %>
+      <%= link_to "Modifier Liste", edit_list_path(@list), class: "btn btn-warning" %>
+      <%= link_to "Supprimer Liste", list_path(@list), method: :delete, data: { confirm: "Etes vous sure?" }, class: "btn btn-danger" %>
     </div>
-
   <% end %>
+</div>
+<div class="container">
+  <div class="bkms-list">
+    <% if @list.bookmarks.empty? %>
+      <h4>Cette liste est vide. Il faudrait peut être lui rajouter du contenu, non?</h4>
+    <% end %>
+    <% @list.bookmarks.each do |bkm| %>
+      <div class="card-bookmark">
+        <img src="<%= bkm.movie.poster_url %>">
+        <div class="card-bookmark-text">
+          <h2><%= bkm.movie.title %></h2>
+          <p><%= bkm.movie.overview %></p>
+          <p><%= bkm.comment %></p>
+          <% if @list.user == current_user %>
+            <%= link_to "Supprimer le signet", bookmark_path(bkm), method: :delete, data: { confirm: "Etes vous sure?" } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

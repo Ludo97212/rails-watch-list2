@@ -1,5 +1,8 @@
 <%= simple_form_for @list do |f|%>
-  <%= f.input :name, label: "Nom" %>
-  <%= f.input :photo, as: :file, label: "Ajoutez une image pour votre liste" %>
+  <%= f.input :name, label: "Nom", html5: true %>
+  <%= f.input :photo, as: :file, label: "Ajoutez une image pour votre liste", html5: true %>
+  <% if @list.photo.present? %>
+    <%= cl_image_tag @list.photo.key, height: 150, width: 150, crop: :fill %>
+  <% end %>
   <%= f.submit "Enregistrer", class: "btn btn-primary" %>
 <% end %>

@@ -1,0 +1,16 @@
+<div class="container">
+  <% if @lists.empty? %>
+    <h2>0 résultat. Essayez de créer de nouvelles listes</h2>
+    <% else %>
+  <div class="grid">
+    <% @lists.each do |list| %>
+      <div class="card">
+        <%= cl_image_tag list.photo.key, crop: :fill %>
+        <div class="card-title">
+          <h2><%= link_to list.name, list_path(list) %></h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
