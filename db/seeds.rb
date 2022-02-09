@@ -6,14 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Destroy everything"
+puts "Destroying Bookmarks"
 Bookmark.destroy_all
+puts "Destroying Lists"
 List.destroy_all
+puts "Destroying Movies"
 Movie.destroy_all
 
 puts "Creating movies"
 url = "http://tmdb.lewagon.com/movie/top_rated"
-3.times do |i|
+10.times do |i|
   puts "Importing movies from page #{i + 1}"
   movies = JSON.parse(open("#{url}?page=#{i + 1}").read)['results']
   movies.each do |movie|
@@ -26,6 +28,7 @@ url = "http://tmdb.lewagon.com/movie/top_rated"
       rating: movie['vote_average']
     )
   end
+  puts "One page of movie"
 end
 
 puts "Finished"
