@@ -1,5 +1,10 @@
+<div class="container">
+<h1>Nouveau signet</h1>
 <%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.association :movie, label: "Film", html5: true %>
-  <%= f.input :comment, as: :rich_text_area, label: "Votre commentaire" %>
+<p>Sélectionner un film</p>
+  <%= f.association :movie, label: false, html5: true %>
+  <p>Votre commentaire</p>
+  <%= f.input :comment, label: false %>
   <%= f.submit "Ajouter" %>
 <% end %>
+</div>

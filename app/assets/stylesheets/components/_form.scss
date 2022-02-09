@@ -12,6 +12,7 @@
   appearance: none;
   border-radius: 5px;
   margin-bottom: 30px;
+  flex-direction: column;
 }
 
 
@@ -28,6 +29,10 @@
 }
 
 .select {
-  padding: 12px;
-  font-weight: bold;
+  padding: 12px 0px 12px 0px;
+}
+
+#list_photo {
+  height: 33px;
+  padding: 0%;
 }

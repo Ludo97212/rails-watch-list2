@@ -3,5 +3,5 @@ class List < ApplicationRecord
   has_many :movies, through: :bookmarks
   belongs_to :user
   has_one_attached :photo
-  validates :name, presence: true
+  validates :name, :photo, presence: true
 end
